@@ -38,9 +38,9 @@ const Navbar = () => {
       color="white"
     >
       <Box mr="8px">
-        <Link to="/" fontSize="xl" fontWeight="bold">
+       
           My University
-        </Link>
+       
       </Box>
 
      {isLoggedIn && 

@@ -12,7 +12,7 @@ import {
   Heading,
   Text,
   useColorModeValue,
-  Link,
+  
 } from '@chakra-ui/react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { NavLink, useNavigate } from 'react-router-dom';
