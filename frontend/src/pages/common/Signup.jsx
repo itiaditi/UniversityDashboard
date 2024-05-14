@@ -17,7 +17,7 @@ import Swal from"sweetalert2"
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-function Signup() {
+const Signup=()=> {
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
