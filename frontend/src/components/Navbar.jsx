@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import { NavLink, useNavigate } from "react-router-dom";
-// import { AuthContext } from "./AuthContext";
-const AuthContext = () => import('./AuthContext');
+import { AuthContext } from "./AuthContext";
+
 import Swal from"sweetalert2"
 
 const Navbar = () => {

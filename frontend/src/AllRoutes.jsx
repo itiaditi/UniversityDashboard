@@ -1,14 +1,13 @@
 import React, {  useContext } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
-const Login = () => import('./pages/common/Login');
-const Signup = () => import('./pages/common/Signup');
-const StudentList = () => import('./pages/admin/StudentList');
-const MarksPage = () => import('./pages/admin/MarksPage');
-const StreamPage = () => import('./pages/admin/StreamPage');
-const SubjectPage = () => import('./pages/admin/SubjectPage');
-
+import Login from './pages/common/Login';
+import Signup from './pages/common/Signup';
+import StudentList from './pages/admin/StudentList';
+import MarksPage from './pages/admin/MarksPage';
+import StreamPage from './pages/admin/StreamPage';
+import SubjectPage from './pages/admin/SubjectPage';
 import { AuthContext } from './components/AuthContext';
-// const AuthContext = () => import('./components/AuthContext');
+
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
 const PrivateRoute = ({Component }) => {

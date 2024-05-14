@@ -1,7 +1,7 @@
 
 // import './App.css'
-const AllRoutes =()=>import('./AllRoutes');
-const Navbar = () => import('./components/Navbar');
+import AllRoutes from './AllRoutes'
+import Navbar from './components/Navbar'
 
 function App() {
 

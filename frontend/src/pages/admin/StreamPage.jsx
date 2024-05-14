@@ -23,7 +23,7 @@ const StreamPage = () => {
   const fetchStudentList = async () => {
     try {
       const response = await fetch(
-        "https://universitydashboard.onrender.com/admin/studentlist"
+        "https://universitydashboard.onrender.com/admin/streams/get"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch student list");
@@ -35,15 +35,11 @@ const StreamPage = () => {
     }
   };
 
-  const handleEdit = (id) => {
-    // Handle edit action, you can navigate to an edit page or open a modal
-    console.log("Edit student with ID:", id);
-  };
 
   const handleDelete = async (id) => {
     try {
       const response = await fetch(
-        `https://universitydashboard.onrender.com/admin/studentlist/${id}`,
+        `https://universitydashboard.onrender.com/admin/studentList/${id}`,
         {
           method: "DELETE",
         }
@@ -93,12 +89,12 @@ const StreamPage = () => {
             <Tr key={student._id}>
               <Td>{student.name}</Td>
               <Td>{student.email}</Td>
-              <Td>{student.stream ? student.stream.name : "-"}</Td>
-              <Td>{student.subject ? student.subject.name : "-"}</Td>
+              {/* <Td>{student.stream ? student.stream.name : "-"}</Td>
+              <Td>{student.subject ? student.subject.name : "-"}</Td> */}
               <Td>
                 <IconButton
                   icon={<HiOutlinePencil />}
-                  onClick={() => handleEdit(student._id)}
+                  
                 />
               </Td>
               <Td>
