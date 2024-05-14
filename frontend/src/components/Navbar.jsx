@@ -38,7 +38,7 @@ const Navbar = () => {
       color="white"
     >
       <Box mr="8px">
-        <Link href="/" fontSize="xl" fontWeight="bold">
+        <Link to="/" fontSize="xl" fontWeight="bold">
           My University
         </Link>
       </Box>
