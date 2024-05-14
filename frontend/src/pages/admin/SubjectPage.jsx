@@ -23,7 +23,7 @@ const SubjectPage = () => {
   const fetchStudentList = async () => {
     try {
       const response = await fetch(
-        "https://universitydashboard.onrender.com/admin/studentlist"
+        "https://universitydashboard-1.onrender.com/admin/studentlist"
       );
       if (!response.ok) {
         throw new Error("Failed to fetch student list");

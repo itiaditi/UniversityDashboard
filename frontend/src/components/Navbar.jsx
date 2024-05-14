@@ -1,12 +1,32 @@
 import React, { useContext } from "react";
 import { Box, Flex, Link } from "@chakra-ui/react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "./AuthContext";
-
+import Swal from"sweetalert2"
 
 const Navbar = () => {
-    const {isLoggedIn}=useContext(AuthContext);
-
+    const {isLoggedIn,setLoggedIn}=useContext(AuthContext);
+    const navigate = useNavigate();
+    const handleLogout = ()=>{
+      localStorage.removeItem("accessToken");
+      setLoggedIn(false)
+      navigate("/login")
+      const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Logout successfully"
+        });
+  }
   return (
     <Flex
       as="nav"
@@ -43,7 +63,7 @@ const Navbar = () => {
         <NavLink to="/stream" pr={4}>
           Stream
         </NavLink>
-        <NavLink to='/' pr={4}>
+        <NavLink to='/' pr={4} onClick={handleLogout}>
             Logout
         </NavLink>
       </Box>

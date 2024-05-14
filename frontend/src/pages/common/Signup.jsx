@@ -30,7 +30,7 @@ function Signup() {
     setLoading(true);
 
     try {
-      const response = await fetch('https://universitydashboard.onrender.com/student/register', {
+      const response = await fetch('https://universitydashboard-1.onrender.com/student/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const subjects = mongoose.Schema({
     name : String,
-	streams : { type: mongoose.Schema.Types.ObjectId, ref: 'streams'}
+	streamsID : { type: String, ref: 'streams'}
 },{
     versionKey:false
 })

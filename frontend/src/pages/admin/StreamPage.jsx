@@ -61,7 +61,7 @@ const StreamPage = () => {
   const fetchMarks = async (id) => {
     try {
       const response = await fetch(
-        `https://universitydashboard.onrender.com/admin/marks/${id}`
+        `https://universitydashboard-1.onrender.com/admin/marks/${id}`
       );
       if (!response.ok) {
         throw new Error("Failed to fetch marks");

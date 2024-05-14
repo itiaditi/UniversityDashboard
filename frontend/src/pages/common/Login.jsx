@@ -31,7 +31,7 @@ function Login() {
     setLoading(true);
 
     try {
-      const response = await fetch('https://universitydashboard.onrender.com/student/login', {
+      const response = await fetch('https://universitydashboard-1.onrender.com/student/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

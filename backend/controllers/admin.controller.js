@@ -64,12 +64,10 @@ const getSubjects = async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 };
-
-//subject
 const addSubject = async (req, res) => {
     try {
-        const { name, streamId } = req.body;
-        const subject = new SubjectModel({ name, stream: streamId });
+        const { name, streamId } = req.body; 
+        const subject = new SubjectModel({ name, streamID: streamId });
         await subject.save();
         res.status(201).json({ message: 'Subject added successfully', subject });
     } catch (error) {
@@ -81,8 +79,8 @@ const addSubject = async (req, res) => {
 const updateSubject = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name } = req.body;
-        const subject = await SubjectModel.findByIdAndUpdate(id, { name }, { new: true });
+        const { names } = req.body;
+        const subject = await SubjectModel.findByIdAndUpdate(id, { name: names }, { new: true });
         if (!subject) {
             return res.status(404).json({ message: 'Subject not found' });
         }
@@ -106,6 +104,7 @@ const deleteSubject = async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 };
+
 
 //marks
 const getMark = async (req, res) => {
