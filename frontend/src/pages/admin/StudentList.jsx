@@ -18,7 +18,7 @@ const StudentList = () => {
 
   const fetchStudentList = async () => {
     try {
-      const response = await fetch("https://universitydashboard-1.onrender.com/admin/studentlist");
+      const response = await fetch("https://universitydashboard-1.onrender.com/admin/studentList");
       if (!response.ok) {
         throw new Error("Failed to fetch student list");
       }

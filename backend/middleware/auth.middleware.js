@@ -4,7 +4,7 @@ const { blacklistModel } = require("../models/blacklist.model");
 
 const auth=async(req,res,next)=>{
     const header=req.headers["authorization"];
-    const token = header.split(" ")[1];
+    const token = header;
     if(!token){
      return res.status(401).json({msg:"token is not provided"});
     }
