@@ -7,7 +7,15 @@ const { SubjectModel } = require("../models/subject.model");
 const addStream = async (req, res) => {
     try {
         const { name } = req.body;
-        const stream = new StreamModel({ name });
+        const streams = await StreamModel.find();
+        let id = 1;
+
+        if (streams && streams.length > 0) {
+            streams.sort((a, b) => a.streamId - b.streamId);
+            id = streams[streams.length - 1].streamId + 1;
+        }
+
+        const stream = new StreamModel({ streamId: id, name });
         await stream.save();
         res.status(201).json({ message: 'Stream added successfully', stream });
     } catch (error) {
@@ -64,17 +72,46 @@ const getSubjects = async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 };
+
+const addMark = async (req, res) => {
+    try {
+        const { name, streamId, subID, marks } = req.body;
+        const marksData=await MarksModel.find();
+        let id=1;
+        if(marksData&&marksData.length>0){
+          marksData.sort((a, b) => a.marksId - b.marksId)
+             id=marksData[marksData.length-1].marksId;
+             id=id+1;
+        }
+        const report = new MarksModel({ name, streamId, subID, marks,marksId:id });
+        await report.save();
+        res.status(201).json({ message: "Marks added successfully", report });
+    } catch (error) {
+        console.error("Error adding marks:", error);
+        res.status(500).json({ message: "Internal server error"});
+    }
+};
+
 const addSubject = async (req, res) => {
     try {
-        const { name, streamId } = req.body; 
-        const subject = new SubjectModel({ name, streamID: streamId });
+        const { name, streamId } = req.body;
+        const subjects = await SubjectModel.find();
+        let id = 1;
+        if (subjects && subjects.length > 0) {
+            subjects.sort((a, b) => a.subID - b.subID);
+            id = subjects[subjects.length - 1].subID + 1;
+        }
+    
+        const subject = new SubjectModel({ subID: id, name, streamId });
         await subject.save();
         res.status(201).json({ message: 'Subject added successfully', subject });
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Server error' });
+        console.error('Error adding subject:', error);
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+
 
 const updateSubject = async (req, res) => {
     try {
@@ -116,17 +153,7 @@ const getMark = async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 };
-const addMark = async (req, res) => {
-    try {
-        const { studentId, subjectId, marks } = req.body;
-        const mark = new MarksModel({ student: studentId, subject: subjectId, marks });
-        await mark.save();
-        res.status(201).json({ message: 'Mark added successfully', mark });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Server error' });
-    }
-};
+
 
 const updateMark = async (req, res) => {
     try {

@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const stream = mongoose.Schema({
-	
-        name : String
+    streamId:{type:Number,unique:true},
+        name : {type:String,unique:true}
 
 },{
     versionKey:false

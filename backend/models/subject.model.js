@@ -1,14 +1,11 @@
 const mongoose = require("mongoose");
 
-const subjects = mongoose.Schema({
-    name : String,
-	streamsID : { type: String, ref: 'streams'}
-},{
-    versionKey:false
-})
+const subjectsSchema = mongoose.Schema({
+    subID: { type: Number, unique: true },
+    name: { type: String, unique: true },
+    streamId: { type: Number, ref: 'streams' }
+}, { versionKey: false });
 
-const SubjectModel = mongoose.model('subjects',subjects);
+const SubjectModel = mongoose.model('subjects', subjectsSchema);
 
-module.exports={
-    SubjectModel
-}
+module.exports = { SubjectModel };

@@ -5,13 +5,13 @@ const { access } = require('../middleware/access.middleware');
 const adminRouter = express.Router();
 
 // Streams
-adminRouter.post('/streams/get',auth,access("admin"), getStreams);
+adminRouter.get('/streams/get',auth,access("admin"), getStreams);
 adminRouter.post('/streams/add',auth,access("admin"), addStream);
 adminRouter.patch('/streams/update/:id',auth,access("admin"), updateStream);
 adminRouter.delete('/streams/delete/:id',auth,access("admin"), deleteStream);
 
 // Subjects
-adminRouter.post('/subjects/get',auth,access("admin"), getSubjects);
+adminRouter.get('/subjects/get',auth,access("admin"), getSubjects);
 adminRouter.post('/subjects/add',auth,access("admin"), addSubject);
 adminRouter.put('/subjects/update/:id',auth,access("admin"), updateSubject);
 adminRouter.delete('/subjects/delete/:id',auth,access("admin"), deleteSubject);
