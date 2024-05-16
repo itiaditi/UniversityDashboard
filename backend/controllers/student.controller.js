@@ -63,7 +63,7 @@ const loginStudent = async (req, res) => {
                     "masai",
                     { expiresIn: "1h" }
                 );
-                return res.json({ message: 'Student login successfully', accessToken: access_token, refreshToken: refresh_token })
+                return res.json({ message: 'Student login successfully', userId:Student.StudentId,accessToken: access_token, refreshToken: refresh_token })
             } else {
                 return res.status(401).json({ message: "Student credential is wrong" })
             }

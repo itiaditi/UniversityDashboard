@@ -146,7 +146,7 @@ const deleteSubject = async (req, res) => {
 //marks
 const getMark = async (req, res) => {
     try {
-        const students = await MarksModel.find({ role: 'student' });
+        const students = await MarksModel.find();
         res.status(200).json(students);
     } catch (error) {
         console.error(error);
