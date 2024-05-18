@@ -7,9 +7,11 @@ import Swal from"sweetalert2"
 
 const Navbar = () => {
     const {isLoggedIn,setLoggedIn}=useContext(AuthContext);
+    
     const navigate = useNavigate();
     const handleLogout = ()=>{
       localStorage.removeItem("accessToken");
+      localStorage.removeItem("userId");
       setLoggedIn(false)
       navigate("/login")
       const Toast = Swal.mixin({
@@ -44,7 +46,7 @@ const Navbar = () => {
        
       </Box>
 
-     {isLoggedIn && 
+     {isLoggedIn.isAdmin && 
  <Box
         display={{ base: "none", md: "flex" }}
         width={{ base: "full", md: "auto" }}
@@ -70,15 +72,34 @@ const Navbar = () => {
       </Box>
       
      }
-     {!isLoggedIn && 
-      <Box
+        {isLoggedIn.isStudent && 
+ <Box
         display={{ base: "none", md: "flex" }}
+        width={{ base: "full", md: "auto" }}
         alignItems="center"
         flexGrow={1}
-        justifyContent="space-evenly"
+        justifyContent={"space-between"}
       >
-        
+       
+       
+        <NavLink to="/profile" pr={4}>
+          Profile
+        </NavLink>
+        <NavLink to="/performance" pr={4}>
+          Performance
+        </NavLink>
+        <NavLink to='/' pr={4} onClick={handleLogout}>
+            Logout
+        </NavLink>
+      </Box>
       
+     }
+     {!isLoggedIn.isStudent && 
+     !isLoggedIn.isAdmin &&(
+      <Box display={{ base: "none", md: "flex" }}
+        alignItems="center"
+        flexGrow={1}
+        justifyContent="space-evenly">
             <NavLink to='/login' mr={4}>
               Login
             </NavLink>
@@ -86,10 +107,8 @@ const Navbar = () => {
               Sign Up
             </NavLink>
          
-        
-       
-      </Box>
-}
+        </Box>)
+        }
     </Flex>
   );
 };

@@ -15,7 +15,7 @@ import { FiEdit2 } from "react-icons/fi";
 
 const StreamPage = () => {
   const [students, setStudents] = useState([]);
-
+  const [editingId, setEditingId] = useState(null);
   useEffect(() => {
     fetchStudentList();
   }, []);
@@ -23,36 +23,50 @@ const StreamPage = () => {
   const fetchStudentList = async () => {
     try {
       const response = await fetch(
-        "https://universitydashboard.onrender.com/admin/streams/get"
+        "https://universitydashboard-1.onrender.com/admin/streams/get",
+        {
+          headers: {
+            Authorization: `${localStorage.getItem("accessToken")}`,
+          }
+      }
       );
       if (!response.ok) {
         throw new Error("Failed to fetch student list");
       }
       const data = await response.json();
+      console.log("line2",data);
       setStudents(data);
     } catch (error) {
       console.error(error);
     }
   };
 
-
-  const handleDelete = async (id) => {
+  const handleSave = async (id) => {
     try {
-      const response = await fetch(
-        `https://universitydashboard.onrender.com/admin/studentList/${id}`,
-        {
-          method: "DELETE",
+        const studentToUpdate = students.find(student => student._id === id);
+        const response = await fetch(`https://universitydashboard.onrender.com/admin/streams/update/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `${localStorage.getItem("accessToken")}`,
+            },
+            body: JSON.stringify({
+                name: studentToUpdate.name,
+                email: studentToUpdate.email,
+                // Add other fields as needed
+            }),
+        });
+        if (!response.ok) {
+            throw new Error("Failed to update student");
         }
-      );
-      if (!response.ok) {
-        throw new Error("Failed to delete student");
-      }
-      // Remove deleted student from the state
-      setStudents(students.filter((student) => student._id !== id));
+       
+        setEditingId(null);
+        fetchStudentList();
     } catch (error) {
-      console.error(error);
+        console.error("Error updating student:", error);
     }
-  };
+};
+
 
   const fetchMarks = async (id) => {
     try {
@@ -69,33 +83,36 @@ const StreamPage = () => {
       console.error(error);
     }
   };
-
+console.log(students);
   return (
     <Box className="container">
       <Table className="table" id="makeEditable">
         <Thead>
           <Tr>
-            <Th>Name</Th>
-            <Th>Email</Th>
+           
             <Th>Stream</Th>
             <Th>Subject</Th>
             <Th>Edit</Th>
             <Th>Delete</Th>
-            <Th>Fetch Marks</Th>
+            {/* <Th>Fetch Marks</Th> */}
           </Tr>
         </Thead>
         <Tbody>
           {students.map((student) => (
             <Tr key={student._id}>
-              <Td>{student.name}</Td>
-              <Td>{student.email}</Td>
-              {/* <Td>{student.stream ? student.stream.name : "-"}</Td>
-              <Td>{student.subject ? student.subject.name : "-"}</Td> */}
+              {/* <Td>{student.name}</Td>
+              <Td>{student.email}</Td> */}
+              <Td>{student.name }</Td>
+              <Td>{student.subject ? student.subject.name : "-"}</Td>
               <Td>
-                <IconButton
-                  icon={<HiOutlinePencil />}
-                  
-                />
+              {editingId === student._id ? (
+                  <button onClick={() => handleSave(student._id)}>Save</button>
+                ) : (
+                  <IconButton
+                    icon={<HiOutlinePencil />}
+                    onClick={() => handleEdit(student._id)}
+                  />
+                )}
               </Td>
               <Td>
                 <IconButton
@@ -103,12 +120,12 @@ const StreamPage = () => {
                   onClick={() => handleDelete(student._id)}
                 />
               </Td>
-              <Td>
+              {/* <Td>
                 <IconButton
                   icon={<FiEdit2 />}
                   onClick={() => fetchMarks(student._id)}
                 />
-              </Td>
+              </Td> */}
             </Tr>
           ))}
         </Tbody>

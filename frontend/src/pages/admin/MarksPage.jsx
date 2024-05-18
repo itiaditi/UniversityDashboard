@@ -22,13 +22,17 @@ const MarksPage = () => {
 
   const fetchStudentList = async () => {
     try {
-      const response = await fetch(
-        "https://universitydashboard-1.onrender.com/admin/studentlist"
-      );
+      const response = await fetch("https://universitydashboard-1.onrender.com/admin/marks/get",
+        {
+          headers: {
+            Authorization: `${localStorage.getItem("accessToken")}`,
+          }
+      });
       if (!response.ok) {
         throw new Error("Failed to fetch student list");
       }
       const data = await response.json();
+      console.log(data);
       setStudents(data);
     } catch (error) {
       console.error(error);
@@ -73,7 +77,7 @@ const MarksPage = () => {
       console.error(error);
     }
   };
-
+// console.log(students)
   return (
     <Box className="container">
       <Table className="table" id="makeEditable">

@@ -7,6 +7,8 @@ import MarksPage from './pages/admin/MarksPage';
 import StreamPage from './pages/admin/StreamPage';
 import SubjectPage from './pages/admin/SubjectPage';
 import { AuthContext } from './components/AuthContext';
+import Performance from './pages/students/Performance';
+import Profile from './pages/students/Profile';
 
 
 // eslint-disable-next-line react/prop-types, no-unused-vars
@@ -22,12 +24,14 @@ const AllRoutes = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        
+        <Route path="/performance"element={<Performance/>}/>
+        <Route path="/profile" element={<Profile/>}/>
           <Route path="/" element={<PrivateRoute Component={StudentList} />} />
           <Route path="/studentList" element={<PrivateRoute Component={StudentList} />} />
           <Route path="/marks" element={<PrivateRoute Component={MarksPage} />} />
           <Route path="/stream" element={<PrivateRoute Component={StreamPage} />} />
           <Route path="/subject" element={<PrivateRoute Component={SubjectPage} />} />
+          {/* <Route path="/performance" element={<Performance/>}/> */}
        
       </Routes>
     </div>

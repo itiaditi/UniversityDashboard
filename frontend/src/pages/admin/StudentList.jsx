@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from "react";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  Box,
-} from "@chakra-ui/react";
+import { Table, Thead, Tbody, Tr, Th, Td, Box, Input } from "@chakra-ui/react";
 
 const StudentList = () => {
   const [students, setStudents] = useState([]);
+  const [editingId, setEditingId] = useState(null);
 
   useEffect(() => {
     fetchStudentList();
@@ -23,11 +16,19 @@ const StudentList = () => {
         throw new Error("Failed to fetch student list");
       }
       const data = await response.json();
-      console.log(data)
       setStudents(data);
     } catch (error) {
       console.error(error);
     }
+  };
+
+  const handleEdit = (id) => {
+    setEditingId(id);
+  };
+
+  const handleSave = async (id) => {
+    
+    setEditingId(null); 
   };
 
   return (
@@ -37,17 +38,39 @@ const StudentList = () => {
           <Tr>
             <Th>Name</Th>
             <Th>Email</Th>
-            <Th>Password</Th>
-            <Th>Role</Th>
+            <Th>Actions</Th>
           </Tr>
         </Thead>
         <Tbody>
           {students.map((student) => (
             <Tr key={student._id}>
-              <Td>{student.name}</Td>
-              <Td>{student.email}</Td>
-              <Td>{student.password}</Td>
-              {/* <Td>{student.role}</Td> */}
+              <Td>
+                {editingId === student._id ? (
+                  <Input
+                    defaultValue={student.name}
+                    onBlur={() => handleSave(student._id)}
+                  />
+                ) : (
+                  student.name
+                )}
+              </Td>
+              <Td>
+                {editingId === student._id ? (
+                  <Input
+                    defaultValue={student.email}
+                    onBlur={() => handleSave(student._id)}
+                  />
+                ) : (
+                  student.email
+                )}
+              </Td>
+              <Td>
+                {editingId === student._id ? (
+                  <button onClick={() => handleSave(student._id)}>Save</button>
+                ) : (
+                  <button onClick={() => handleEdit(student._id)}>Edit</button>
+                )}
+              </Td>
             </Tr>
           ))}
         </Tbody>

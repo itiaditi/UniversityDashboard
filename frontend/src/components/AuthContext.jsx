@@ -4,9 +4,12 @@ import axios from "axios";
  
   const userRes={
     isAuth:false,
+    isAdmin:"",
+    isStudent:"",
     token:""
   }
 export const AuthContext =createContext();
+export const useAuth = () => useContext(AuthContext);
 // eslint-disable-next-line react/prop-types
 export const AuthContextProvider=({children})=>{
       const [isLoggedIn, setLoggedIn] = useState(userRes);
