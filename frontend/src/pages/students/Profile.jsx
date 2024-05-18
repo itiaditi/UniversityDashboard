@@ -25,7 +25,7 @@ const Profile = () => {
 
       try {
         const response = await fetch(
-          `http://localhost:8080/student/profile/${userId}`,{
+          `https://universitydashboard-1.onrender.com/student/profile/${userId}`,{
             
                 headers: {
                   Authorization: `${localStorage.getItem("accessToken")}`,

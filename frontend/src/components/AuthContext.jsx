@@ -50,7 +50,7 @@ export const AuthContextProvider=({children})=>{
       const handleLogout = async () => {
         try {
           const token = localStorage.getItem("accessToken");
-          const res = await axios.get("http://localhost:8080/users/logout", {
+          const res = await axios.get("https://universitydashboard-1.onrender.com/users/logout", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
