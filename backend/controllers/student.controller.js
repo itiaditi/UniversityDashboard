@@ -54,16 +54,16 @@ const loginStudent = async (req, res) => {
             if (result) {
 
                 const access_token = jwt.sign(
-                    { StudentId: Student.StudentId, email, role: Student.role },
+                    { StudentId: Student._id, email, role: Student.role },
                     "masai",
                     { expiresIn: "1h" }
                 );
                 const refresh_token = jwt.sign(
-                    { StudentId: Student.StudentId, email, role: Student.role },
+                    { StudentId: Student._id, email, role: Student.role },
                     "masai",
                     { expiresIn: "1h" }
                 );
-                return res.json({ message: 'Student login successfully', userId:Student.StudentId,accessToken: access_token, refreshToken: refresh_token })
+                return res.json({ message: 'Student login successfully', userId:Student._id,accessToken: access_token, refreshToken: refresh_token })
             } else {
                 return res.status(401).json({ message: "Student credential is wrong" })
             }
