@@ -5,6 +5,9 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   build: {
-    chunkSizeWarningLimit: 1024 * 500, // Set the warning limit to 500 kB (adjust as needed)
+    chunkSizeWarningLimit: 1024 * 500, 
+    rollupOptions: {
+      external: ['@chakra-ui/icons'],
+    },
   },
 })
