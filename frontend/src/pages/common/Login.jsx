@@ -17,6 +17,8 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { NavLink, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../../components/AuthContext';
+import { IoIosEye } from 'react-icons/io';
+import { BiHide } from 'react-icons/bi';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -141,7 +143,7 @@ const Login = () => {
                     variant={'ghost'}
                     onClick={() => setShowPassword((showPassword) => !showPassword)}
                   >
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    {showPassword ? <IoIosEye /> : <BiHide />}
                   </Button>
                 </InputRightElement>
               </InputGroup>

@@ -14,9 +14,10 @@ import {
   useColorModeValue
 } from '@chakra-ui/react';
 import Swal from"sweetalert2"
-import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import { IoIosEye } from "react-icons/io";
+// import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { NavLink, useNavigate } from 'react-router-dom';
-
+import { BiHide } from "react-icons/bi";
 const Signup=()=> {
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState('');
@@ -110,7 +111,7 @@ const Signup=()=> {
                   <Button
                     variant={'ghost'}
                     onClick={() => setShowPassword((showPassword) => !showPassword)}>
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    {showPassword ? <IoIosEye /> : <BiHide />}
                   </Button>
                 </InputRightElement>
               </InputGroup>
